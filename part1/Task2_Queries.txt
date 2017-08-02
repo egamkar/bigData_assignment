@@ -1,0 +1,6 @@
+
+create table query2 as select userid,min(time)as min_time,hotel from clicklog_data where hotel <> '' group by userid,hotel;
+
+create table query2_rank as select userid, min_time, hotel, rank() over (partition by userid order by min_time) as rank from query2;
+
+select userid, hotel from query2_rank where rank = 2 union select userid,'' from (select userid from query2_rank group by userid having max(rank) =1)a;

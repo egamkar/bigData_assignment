@@ -1,0 +1,26 @@
+Welcome to the trivago-Hadoop-challenge.
+
+We are glad that you made it up to this point.
+
+The first answer we want you to send us back is a short description of the steps you took to find the zipfile containing this text.
+
+Here are some hints for the next challange:
+
+We want you to write a mapreduce application to process the files in ./input.
+In each line of text there is only one character that makes sense, the others are almost random.
+The Character that makes sense is at position (linenumber % 40). 
+Example:
+for Line 0 
+CXXXXXXXXXXXXXX
+for Line 5
+XXXXXCXXXXXXXXX
+for Line 46
+XXXXXXCXXXXXXXX
+All lines have the same length of 40 ascii characters.
+New Lines have been replaced by the pipe character "|";
+ 
+
+hfgl,
+the trivago recruting and IT-Team
+
+:)

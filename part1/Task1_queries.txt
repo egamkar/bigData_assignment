@@ -1,0 +1,13 @@
+create table clicklog_data (userid String, time string, action string,destination string, hotel string)
+
+load data inpath '/trivago/hadoop/challenge/input1/*.txt' into table clicklog_data
+
+create table data1 as select a.*, cast(cast(translate(time,':','') as int)/1000 as int) as rank from clicklog_data a
+
+
+create table data2 as select destination, rank as group_id, count(1) as search_count from data1 where destination <> '' group by rank, destination order by search_count desc,destination;
+
+
+create table final1 as select * from (select destination, group_id, search_count , rank() over (partition by group_id order by search_count desc, destination) as rank from data2)ranked_mytable where ranked_mytable.rank <= 10 order by group_id,rank;
+
+select * from final1 order by group_id,rank limit 50;
